@@ -1,0 +1,29 @@
+
+<?php
+
+class GestionnaireComptes
+{
+    private static $instances = [];
+
+    public static function obtenirCompte($numeroDeCompte)
+    {
+        if (isset(self::$instances[$numeroDeCompte])) {
+            // Si un compte avec le même numéro existe déjà, renvoie une erreur
+            throw new RuntimeException("Un compte avec le numéro $numeroDeCompte existe déjà.");
+        } else {
+            // Si le compte n'existe pas, créer une nouvelle instance de CompteBancaire
+            $titulaire = "Titulaire du compte";
+            $devise = "EUR";
+            $premium = true;
+
+            // créer une nouvelle instance de CompteBancaire
+            $nouveauCompte = new CompteBancaire($titulaire, $numeroDeCompte, $devise, $premium);
+
+            // stock cette instance dans le tableau
+            self::$instances[$numeroDeCompte] = $nouveauCompte;
+        }
+
+        // renvoie l'instance du compte
+        return self::$instances[$numeroDeCompte];
+    }
+}

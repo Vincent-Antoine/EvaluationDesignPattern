@@ -1,0 +1,102 @@
+<?php
+
+//Je declare ma class
+class CompteBancaire
+{
+
+    //Declaration des propriétés
+    //Mise en œuvre de l'encapsulation avec les "private" afin de controler l'accès, sécurisé et valider les données.
+    private string $titulaire;
+    private int $numeroDeCompte;
+    private float $solde;
+    private string $devise;
+    private bool $premium;
+
+    // Constructeur + implémentation du solde initiale à 0
+    public function __construct($titulaire, $numeroDeCompte, $devise, $premium, $solde = 0.0)
+    {
+        $this->titulaire = $titulaire;
+        $this->numeroDeCompte = $numeroDeCompte;
+        $this->solde = $solde;
+        $this->devise = $devise;
+        $this->premium = $premium;
+    }
+
+    // Getters et setters pour chaque propriété
+    public function getTitulaire()
+    {
+        return $this->titulaire;
+    }
+
+    public function setTitulaire($titulaire)
+    {
+        $this->titulaire = $titulaire;
+    }
+
+
+    public function getnumeroDeCompte()
+    {
+        return $this->numeroDeCompte;
+    }
+
+    public function setnumeroDeCompte($numeroDeCompte)
+    {
+        $this->numeroDeCompte = $numeroDeCompte;
+    }
+
+    public function getSolde()
+    {
+        return $this->solde;
+    }
+
+    //J'ai supprimé le setter afin qu'il ne puisse pas être modifier sans passer par un retrait ou un depot d'argent. On ne peut pas modifier le solde de son compte bancaire dorectement.
+
+    public function getDevise()
+    {
+        return $this->devise;
+    }
+
+    public function setDevise($devise)
+    {
+        $this->devise = $devise;
+    }
+
+    public function isPremium()
+    {
+        return $this->premium;
+    }
+
+    public function setPremium($premium)
+    {
+        $this->premium = $premium;
+    }
+
+    //On dépose de l'argent ce qui entraine le changement du solde du compte.
+
+    public function deposerArgent($montant)
+    {
+        if ($montant > 0) {
+            $this->solde += $montant;
+        } else {
+            echo "Le montant à déposer doit être positif.";
+        }
+    }
+
+    //On retire de l'argent ce qui entraine le changement du solde du compte.
+
+    public function retirerArgent($montant)
+    {
+        if ($montant <= 0) {
+            echo "Le montant à retirer doit être positif.";
+        } else if ($this->solde >= $montant) {
+            $this->solde -= $montant;
+        } else {
+            echo "Solde insuffisant pour effectuer ce retrait.";
+        }
+    }
+
+    public function afficherSolde()
+    {
+        echo "Solde actuel : " . $this->solde . " " . $this->devise;
+    }
+}

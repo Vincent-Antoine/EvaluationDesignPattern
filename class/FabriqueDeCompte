@@ -1,0 +1,21 @@
+<?php
+
+class FabriqueDeCompte
+{
+    // Méthode statique pour créer un compte
+    public static function creerCompte($type, $titulaire, $numeroDeCompte, $devise, $premium, $soldeInitial)
+    {
+        switch ($type) {
+            case 'CompteBancaire':
+                return new CompteBancaire($titulaire, $numeroDeCompte, $devise, $premium, $soldeInitial);
+            case 'CompteEpargne':
+                return new CompteEpargne($titulaire, $numeroDeCompte, $devise, $premium, $soldeInitial);
+            case 'CompteCourant':
+                return new CompteCourant($titulaire, $numeroDeCompte, $devise, $premium, $soldeInitial);
+            case 'CompteInvestissement':
+                return new CompteInvestissement($titulaire, $numeroDeCompte, $devise, $premium, $soldeInitial);
+            default:
+                throw new Exception("Type de compte non reconnu.");
+        }
+    }
+}

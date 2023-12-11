@@ -1,0 +1,10 @@
+<?php
+
+class CompteEpargne extends CompteBancaire
+{
+
+    public function __construct($titulaire, $numeroDeCompte, $devise, $premium, $solde)
+    {
+        parent::__construct($titulaire, $numeroDeCompte, $devise, $premium, $solde);
+    }
+}
